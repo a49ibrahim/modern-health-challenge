@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 import "./style.css";
 import MessageTable from './Component/MessageTable.js';
+import Message from './Component/Message.js';
+
 
 // This is the list of messages.
 import { messages } from "./data.json";
@@ -13,7 +15,8 @@ class App extends Component {
       data: messages,
       direction: {
         sentAT: 'asc',
-      }
+      },
+      MessageCount: 6
     }
 
     this.sortBy = this.sortBy.bind(this);
@@ -31,14 +34,20 @@ class App extends Component {
     })
   }
 
+  loadMore = () => (
+	    this.setState(prevState => ({MessageCount: prevState.MessageCount + 5}))
+	  )
+
   render() {
     
-    return <MessageTable 
-      data={this.state.data}
-      sortBy={this.sortBy}
-      />
+    return <Message 
+      data={this.state.data}
+      sortBy={this.sortBy}
+      MessageCount={this.state.MessageCount}
+      loadMore = {this.loadMore}
+      />
+
       
-    
   }
 }
 
