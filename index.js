@@ -18,7 +18,6 @@ const GlobalStyle = createGlobalStyle `
 body {
   background-color: ${props =>
     props.theme.mode ==='dark' ? '#111' :'#EEE'};
- }
   color: ${props =>
     props.theme.mode ==='dark' ? '#EEE' :'#111'};
  }
@@ -33,7 +32,8 @@ class App extends Component {
       direction: {
         sentAT: 'asc',
       },
-      MessageCount: 6
+      MessageCount: 6,
+      mode: 'dark'
     }
 
     this.sortBy = this.sortBy.bind(this);
@@ -51,20 +51,27 @@ class App extends Component {
     })
   }
 
-deleteMessage = (index, e) =>{
-  const messages = Object.assign([],this.state.messages);
-  messages.splice(index, 1);
-  this.setState({messages: messages})
-}
+  deleteMessage = (index, e) =>{
+    const messages = Object.assign([],this.state.messages);
+    messages.splice(index, 1);
+    this.setState({messages: messages})
+  }
+
+  changeMode = () => {
+    this.setState({
+      mode: this.state.mode === 'dark'? 'light' : 'dark'
+    })
+    
+  }
 
   loadMore = () => (
-	    this.setState(prevState => ({MessageCount: prevState.MessageCount + 5}))
-	  )
+    this.setState(prevState => ({MessageCount: prevState.MessageCount + 5}))
+	)
 
   render() {
     
     return (
-      <ThemeProvider theme={{ mode : 'dark'}}>
+      <ThemeProvider theme={ {mode: this.state.mode} }>
         <>
           <GlobalStyle />
           <Message 
@@ -73,6 +80,7 @@ deleteMessage = (index, e) =>{
           MessageCount={this.state.MessageCount}
           loadMore = {this.loadMore}
           deleteMessage = {this.deleteMessage}
+          changeMode = {this.changeMode}
           />
         </>
     </ThemeProvider>

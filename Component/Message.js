@@ -9,7 +9,9 @@ const Message = (props) => {
     <div>
       <h1>Welcome to the mess app</h1>
       <h2>Courtsey of Ali Ibrahim</h2>
-      <button>Night Mode</button>
+      <button
+        onClick={() => props.changeMode()}
+      >Night Mode</button>
       <button
          onClick={() => props.sortBy('sentAt')} 
        > sort bySent AT
