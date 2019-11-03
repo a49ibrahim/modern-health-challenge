@@ -12,7 +12,7 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      data: messages,
+      messages: messages,
       direction: {
         sentAT: 'asc',
       },
@@ -25,7 +25,7 @@ class App extends Component {
   
   sortBy(key){
     this.setState({
-      data: messages.sort( (a, b) => (
+      messages: messages.sort( (a, b) => (
         this.state.direction[key] === 'asc' ? Date.parse(a[key])- Date.parse(b[key]) : Date.parse(b[key])- Date.parse(a[key])
       )),
       direction: { 
@@ -34,6 +34,12 @@ class App extends Component {
     })
   }
 
+deleteMessage = (index, e) =>{
+  const messages = Object.assign([],this.state.messages);
+  messages.splice(index, 1);
+  this.setState({messages: messages})
+}
+
   loadMore = () => (
 	    this.setState(prevState => ({MessageCount: prevState.MessageCount + 5}))
 	  )
@@ -41,10 +47,11 @@ class App extends Component {
   render() {
     
     return <Message 
-      data={this.state.data}
+      messages={this.state.messages}
       sortBy={this.sortBy}
       MessageCount={this.state.MessageCount}
       loadMore = {this.loadMore}
+      deleteMessage = {this.deleteMessage}
       />
 
       

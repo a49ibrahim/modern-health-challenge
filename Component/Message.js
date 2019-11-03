@@ -12,19 +12,23 @@ const Message = (props) => {
                 sort bySent AT
               </button>
       {
-            props.data
+            props.messages
             .filter(obj => {
             let key = obj.content+"#"+obj.uuid; 
             return !keys.includes(key) && keys.push(key); 
             })
             .slice(0, (props.MessageCount-1))
             .map((row,index) => (
-              <div className= "singleMessage">
+              <div 
+                id= {index}
+                className= "singleMessage">
                 <h1> index is {index}</h1>
                 <h2> content is {row.content}</h2>
                 <h3> sender is{row.senderUuid}</h3>
                 <h4> sent at <Moment date={row.sentAt}/> </h4>
-                <h5><button>Delete Message</button></h5> 
+                <h5><button
+                      onClick={()=> props.deleteMessage() }
+                      >Delete Message</button></h5> 
               </div>
             ))
           }
