@@ -7,16 +7,17 @@ const Message = (props) => {
   const keys = []
   return (
     <div>
-      
-      <button
+      <div className='appHeader' > 
+        <button
         onClick={() => props.changeMode()}
-      >Night Mode</button>
-      <h1>Welcome to Message App</h1>
-      <h2>Courtsey of Ali Ibrahim</h2>
-      <button
-         onClick={() => props.sortBy('sentAt')} 
-       > sort bySent AT
+        >Night Mode</button>
+        <h1>Welcome to Message App</h1>
+        <h2>Courtsey of Ali Ibrahim</h2>
+        <button
+          onClick={() => props.sortBy('sentAt')}
+        > sort bySent AT
         </button>
+      </div>
       {
          props.messages
           .filter(obj => {
@@ -26,12 +27,12 @@ const Message = (props) => {
           .slice(0, (props.MessageCount-1))
           .map((row,index) => (
            <div 
-              id= {index}
+              key= {index}
               className= "singleMessage"
             >
-            <h2> {row.content}</h2>
-            <h3> from {row.senderUuid}</h3>
-            <h4> at <Moment date={row.sentAt}/> </h4>
+            <h1> {row.content}</h1>
+            <h2> from {row.senderUuid}</h2>
+            <h3> at <Moment date={row.sentAt}/> </h3>
             <button
               onClick={()=> props.deleteMessage() }
               >Delete Message</button> 
@@ -39,7 +40,10 @@ const Message = (props) => {
             ))
           }
           <button 
-          onClick ={() => props.loadMore()} >load more</button>
+          onClick ={() => props.loadMore()} 
+          >load more
+          </button>
+          
     </div>
   )
 }

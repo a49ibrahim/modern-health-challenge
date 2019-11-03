@@ -6,6 +6,7 @@ h1, p {
   text-align: center;
   border: dotted;
   border-color: blue;
+  padding: 5px 5px 5px 5px;
 }
 button {
   background-color: purple; 
@@ -13,4 +14,7 @@ button {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+}
+.appHeader{
+  text-align: center;
 }
