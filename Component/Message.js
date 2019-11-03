@@ -7,7 +7,7 @@ const Message = (props) => {
   const keys = []
   return (
     <div>
-      <h1>Welcome to the mess app</h1>
+      <h1>Welcome to Message App</h1>
       <h2>Courtsey of Ali Ibrahim</h2>
       <button
         onClick={() => props.changeMode()}
