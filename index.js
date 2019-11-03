@@ -4,9 +4,26 @@ import "./style.css";
 import MessageTable from './Component/MessageTable.js';
 import Message from './Component/Message.js';
 
-
 // This is the list of messages.
 import { messages } from "./data.json";
+
+//import themeProvider
+import { 
+  ThemeProvider, 
+  createGlobalStyle 
+} from 'styled-components';
+
+   
+const GlobalStyle = createGlobalStyle `
+body {
+  background-color: ${props =>
+    props.theme.mode ==='dark' ? '#111' :'#EEE'};
+ }
+  color: ${props =>
+    props.theme.mode ==='dark' ? '#EEE' :'#111'};
+ }
+ `;
+
 
 class App extends Component {
   constructor(props){
@@ -46,18 +63,24 @@ deleteMessage = (index, e) =>{
 
   render() {
     
-    return <Message 
-      messages={this.state.messages}
-      sortBy={this.sortBy}
-      MessageCount={this.state.MessageCount}
-      loadMore = {this.loadMore}
-      deleteMessage = {this.deleteMessage}
-      />
-
-      
+    return (
+      <ThemeProvider theme={{ mode : 'dark'}}>
+        <>
+          <GlobalStyle />
+          <Message 
+          messages={this.state.messages}
+          sortBy={this.sortBy}
+          MessageCount={this.state.MessageCount}
+          loadMore = {this.loadMore}
+          deleteMessage = {this.deleteMessage}
+          />
+        </>
+    </ThemeProvider>
+    )  
   }
 }
 
 render(<App />, document.getElementById("root"));
 
 export default App
+
