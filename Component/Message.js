@@ -7,11 +7,12 @@ const Message = (props) => {
   const keys = []
   return (
     <div>
-      <h1>Welcome to Message App</h1>
-      <h2>Courtsey of Ali Ibrahim</h2>
+      
       <button
         onClick={() => props.changeMode()}
       >Night Mode</button>
+      <h1>Welcome to Message App</h1>
+      <h2>Courtsey of Ali Ibrahim</h2>
       <button
          onClick={() => props.sortBy('sentAt')} 
        > sort bySent AT

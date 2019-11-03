@@ -1,11 +1,16 @@
 h1, p {
   font-family: Lato;
+  
 }
 .singleMessage {
-  
+  text-align: center;
   border: dotted;
-  
-  
-
-  
+  border-color: blue;
+}
+button {
+  background-color: purple; 
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
