@@ -5,7 +5,7 @@ h1, p {
 .singleMessage {
   text-align: center;
   border: dotted;
-  border-color: blue;
+  border-color: gold;
   padding: 5px 5px 5px 5px;
 }
 button {
