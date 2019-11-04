@@ -3,6 +3,7 @@ import Moment from 'react-moment';
 import App from '../index.js'
 import { findUniqueMessage  } from './utils';
 
+Moment.globalFormat = 'ddd MMM DD, YYYY @ HH:mm A';
 
 const Message = (props) => {
   const keys = []
@@ -33,7 +34,8 @@ const Message = (props) => {
             >
             <h1> {message.content}</h1>
             <h2> from {message.senderUuid}</h2>
-            <h3> at <Moment date={message.sentAt}/> </h3>
+            <h3>  
+              <Moment date={message.sentAt}/> </h3>
             <button
               onClick ={ () => props.deleteMessage(findUniqueMessage(message)) }
               message={ message }
