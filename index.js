@@ -6,6 +6,8 @@ import Message from './Component/Message.js';
 
 // This is the list of messages.
 import { messages } from "./data.json";
+import { findUniqueMessage  } from './Component/utils';
+
 
 //import themeProvider
 import { 
@@ -51,25 +53,20 @@ class App extends Component {
   }
 
   //to delete message
-  /*
-  deleteMessage = (index, e) =>{
-    const messages = Object.assign([],this.state.messages);
-    console.log('index is ' + index )
-    messages.splice(index, 1);
-    this.setState({messages: messages})
-  }*/
-  deleteMessage(messageIdentifier) {
+  
+  deleteMessage = (messageId) => {
 	    const messages = this.state.messages;
-	    const removalIndex = messages.findIndex(message => (
-	      messageIdentifier === createUniqueIdentifier(message)
+	    const indexToDelete = messages.findIndex(message => (
+	      messageId === findUniqueMessage(message)
 	    ))
-	    if (removalIndex === -1) {
-	      console.log(`Unable to find a message with identifier ${messageIdentifier}`)
+	    if (indexToDelete === -1) {
+	      console.log(`message not availabale ${messageId}`)
 	    } else {
-	      messages.splice(removalIndex, 1);
+	      messages.splice(indexToDelete, 1);
 	    }
-	    this.setState(previousState => ({messages: messages,
-	                                     MessageCount: this.state.MessageCount - 1}));
+	    this.setState(previousState => 
+      ({messages: messages, 
+        MessageCount: this.state.MessageCount - 1}));
   }
 
   //toggle between dark and light mode

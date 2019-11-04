@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Moment from 'react-moment';
 import App from '../index.js'
-import { createUniqueIdentifier  } from './utils';
+import { findUniqueMessage  } from './utils';
 
 
 const Message = (props) => {
@@ -26,17 +26,17 @@ const Message = (props) => {
         return !keys.includes(key) && keys.push(key); 
         })
         .slice(0, (props.MessageCount-1))
-        .map((row,index) => (
+        .map((message,index) => (
           <div 
             key= {index}
             className= "singleMessage"
             >
-            <h1>key is {index} </h1>
-            <h1> {row.content}</h1>
-            <h2> from {row.senderUuid}</h2>
-            <h3> at <Moment date={row.sentAt}/> </h3>
+            <h1> {message.content}</h1>
+            <h2> from {message.senderUuid}</h2>
+            <h3> at <Moment date={message.sentAt}/> </h3>
             <button
-              onClick ={ () => props.deleteMessage(createUniqueIdentifier(row)) }
+              onClick ={ () => props.deleteMessage(findUniqueMessage(message)) }
+              message={ message }
             >Delete Message</button> 
             </div>
             ))

@@ -1,3 +1,3 @@
-export function createUniqueIdentifier(message) {
+export function findUniqueMessage(message) {
 	  return `${message.uuid}:${message.content}`;
 	}
