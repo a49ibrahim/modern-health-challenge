@@ -13,7 +13,8 @@ import {
   createGlobalStyle 
 } from 'styled-components';
 
-   
+//imported this from styles and is used for dark 
+//and night mode
 const GlobalStyle = createGlobalStyle `
 body {
   background-color: ${props =>
@@ -34,13 +35,11 @@ class App extends Component {
       },
       MessageCount: 6,
       mode: 'dark'
-    }
-
-    this.sortBy = this.sortBy.bind(this);
-    
+    } 
   }
   
-  sortBy(key){
+  //for sorting. toggle sort
+  sortBy = (key) =>{
     this.setState({
       messages: messages.sort( (a, b) => (
         this.state.direction[key] === 'asc' ? Date.parse(a[key])- Date.parse(b[key]) : Date.parse(b[key])- Date.parse(a[key])
@@ -51,26 +50,44 @@ class App extends Component {
     })
   }
 
+  //to delete message
+  /*
   deleteMessage = (index, e) =>{
     const messages = Object.assign([],this.state.messages);
+    console.log('index is ' + index )
     messages.splice(index, 1);
     this.setState({messages: messages})
+  }*/
+  deleteMessage(messageIdentifier) {
+	    const messages = this.state.messages;
+	    const removalIndex = messages.findIndex(message => (
+	      messageIdentifier === createUniqueIdentifier(message)
+	    ))
+	    if (removalIndex === -1) {
+	      console.log(`Unable to find a message with identifier ${messageIdentifier}`)
+	    } else {
+	      messages.splice(removalIndex, 1);
+	    }
+	    this.setState(previousState => ({messages: messages,
+	                                     MessageCount: this.state.MessageCount - 1}));
   }
 
+  //toggle between dark and light mode
   changeMode = () => {
     this.setState({
       mode: this.state.mode === 'dark'? 'light' : 'dark'
-    })
-    
+    })  
   }
 
+  //load the next x amount of pages
   loadMore = () => (
     this.setState(prevState => ({MessageCount: prevState.MessageCount + 5}))
 	)
 
   render() {
-    
     return (
+      //imported theme provide and Globalstyles for dark 
+      //and night mode
       <ThemeProvider theme={ {mode: this.state.mode} }>
         <>
           <GlobalStyle />
@@ -79,7 +96,7 @@ class App extends Component {
           sortBy={this.sortBy}
           MessageCount={this.state.MessageCount}
           loadMore = {this.loadMore}
-          deleteMessage = {this.deleteMessage}
+          deleteMessage= {this.deleteMessage}
           changeMode = {this.changeMode}
           />
         </>

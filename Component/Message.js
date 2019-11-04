@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Moment from 'react-moment';
 import App from '../index.js'
+import { createUniqueIdentifier  } from './utils';
 
 
 const Message = (props) => {
@@ -19,38 +20,34 @@ const Message = (props) => {
         </button>
       </div>
       {
-         props.messages
-          .filter(obj => {
-          let key = obj.content+"#"+obj.uuid; 
-          return !keys.includes(key) && keys.push(key); 
-          })
-          .slice(0, (props.MessageCount-1))
-          .map((row,index) => (
-           <div 
-              key= {index}
-              className= "singleMessage"
+        props.messages
+        .filter(obj => {
+        let key = obj.content+"#"+obj.uuid; 
+        return !keys.includes(key) && keys.push(key); 
+        })
+        .slice(0, (props.MessageCount-1))
+        .map((row,index) => (
+          <div 
+            key= {index}
+            className= "singleMessage"
             >
+            <h1>key is {index} </h1>
             <h1> {row.content}</h1>
             <h2> from {row.senderUuid}</h2>
             <h3> at <Moment date={row.sentAt}/> </h3>
             <button
-              onClick={()=> props.deleteMessage() }
-              >Delete Message</button> 
-              </div>
+              onClick ={ () => props.deleteMessage(createUniqueIdentifier(row)) }
+            >Delete Message</button> 
+            </div>
             ))
           }
           <button 
           onClick ={() => props.loadMore()} 
           >load more
           </button>
-          
     </div>
   )
 }
 
 export default Message
 
-/*
-document.body.style.backgroundColor === 'white'?
-          'black' : 'white'
-*/
