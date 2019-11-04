@@ -27,14 +27,14 @@ class App extends Component {
 
   //for sorting. toggle sort
   sortBy = (key) =>{
-    this.setState({
+    this.setState(prevState=> ({
       messages: messages.sort( (a, b) => (
         this.state.direction[key] === 'asc' ? Date.parse(a[key])- Date.parse(b[key]) : Date.parse(b[key])- Date.parse(a[key])
       )),
       direction: { 
         [key]: this.state.direction[key] === 'asc' ? 'desc' : 'asc'
       }
-    })
+    }))
   }
 
   //to delete message
@@ -45,20 +45,20 @@ class App extends Component {
 	      messageId === findUniqueMessage(message)
 	    ))
 	    if (indexToDelete === -1) {
-	      console.log(`message not availabale ${messageId}`)
+	      console.log(`cant find ${messageId}`)
 	    } else {
 	      messages.splice(indexToDelete, 1);
 	    }
-	    this.setState(previousState => 
-      ({messages: messages, 
+	    this.setState(prevState =>(
+      {messages: messages, 
         MessageCount: this.state.MessageCount - 1}));
   }
 
   //toggle between dark and light mode
   changeMode = () => {
-    this.setState({
+    this.setState(prevState => ({
       mode: this.state.mode === 'dark'? 'light' : 'dark'
-    })  
+    }))  
   }
 
   //load the next x amount of pages

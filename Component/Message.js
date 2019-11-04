@@ -3,7 +3,7 @@ import Moment from 'react-moment';
 import App from '../index.js'
 import { findUniqueMessage  } from './utils';
 
-Moment.globalFormat = 'ddd MMM DD, YYYY @ HH:mm A';
+Moment.globalFormat = 'ddd MMM DD, YYYY HH:mm A';
 
 const Message = (props) => {
   const keys = []
