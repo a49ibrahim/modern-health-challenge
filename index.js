@@ -1,31 +1,16 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
 import "./style.css";
-import MessageTable from './Component/MessageTable.js';
+
 import Message from './Component/Message.js';
 
 // This is the list of messages.
 import { messages } from "./data.json";
-import { findUniqueMessage  } from './Component/utils';
+import { findUniqueMessage, GlobalStyle  } from './Component/utils';
 
 
 //import themeProvider
-import { 
-  ThemeProvider, 
-  createGlobalStyle 
-} from 'styled-components';
-
-//imported this from styles and is used for dark 
-//and night mode
-const GlobalStyle = createGlobalStyle `
-body {
-  background-color: ${props =>
-    props.theme.mode ==='dark' ? '#111' :'#EEE'};
-  color: ${props =>
-    props.theme.mode ==='dark' ? '#EEE' :'#111'};
- }
- `;
-
+import { ThemeProvider  } from 'styled-components';
 
 class App extends Component {
   constructor(props){
@@ -39,7 +24,7 @@ class App extends Component {
       mode: 'dark'
     } 
   }
-  
+
   //for sorting. toggle sort
   sortBy = (key) =>{
     this.setState({
@@ -84,7 +69,7 @@ class App extends Component {
   render() {
     return (
       //imported theme provide and Globalstyles for dark 
-      //and night mode
+      //and light mode
       <ThemeProvider theme={ {mode: this.state.mode} }>
         <>
           <GlobalStyle />
@@ -105,4 +90,3 @@ class App extends Component {
 render(<App />, document.getElementById("root"));
 
 export default App
-
